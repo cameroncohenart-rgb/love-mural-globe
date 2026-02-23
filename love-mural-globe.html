@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The LOVE Mural - Global Frequency Network</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DIN Neuzeit Grotesk', Arial, sans-serif;
+            background: white;
+            color: black;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        }
+
+        .pink-line {
+            width: 60px;
+            height: 3px;
+            background: #FF1493;
+            margin: 16px auto;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            letter-spacing: 4px;
+            font-weight: 600;
+        }
+
+        .intro {
+            max-width: 760px;
+            margin: 0 auto 40px;
+            font-size: 17px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .intro p { margin-bottom: 16px; }
+
+        .stats {
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .stats strong {
+            color: #FF1493;
+            font-size: 36px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        #globe-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            cursor: grab;
+            user-select: none;
+        }
+
+        #globe-section:active { cursor: grabbing; }
+
+        #globe-svg { 
+            display: block;
+            margin: 0 auto;
+        }
+
+        .hint {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #aaa;
+            margin-bottom: 70px;
+        }
+
+        /* Registration */
+        .register {
+            background: #f9f9f9;
+            border-radius: 4px;
+            padding: 60px 40px;
+            margin-bottom: 60px;
+        }
+
+        .register h2 {
+            text-align: center;
+            font-size: 28px;
+            letter-spacing: 5px;
+            margin-bottom: 12px;
+        }
+
+        .register p {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 36px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        form { max-width: 460px; margin: 0 auto; }
+
+        .field { margin-bottom: 22px; }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        input[type=text], input[type=file] {
+            width: 100%;
+            padding: 13px;
+            border: 1.5px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        input[type=text]:focus { outline: none; border-color: #FF1493; }
+
+        .note { font-size: 12px; color: #999; margin-top: 5px; }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #FF1493;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .25s;
+        }
+
+        .btn:hover { background: #cc0070; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #aaa;
+        }
+
+        /* Popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background: white;
+            padding: 40px;
+            border-radius: 6px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px; right: 16px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #bbb;
+            width: auto;
+            padding: 0;
+        }
+
+        .close-btn:hover { color: black; background: none; }
+
+        .modal-city {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FF1493;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .modal-text { font-size: 15px; line-height: 1.7; color: #444; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 30px; }
+            .register { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <header>
+        <h1>GLOBAL FREQUENCY NETWORK MAP</h1>
+        <div class="pink-line"></div>
+        <div class="subtitle">THE LOVE MURAL</div>
+    </header>
+
+    <div class="intro">
+        <p>The LOVE Mural is a large-scale, participatory installation composed of 222 individual circular paintings. Each panel carries a hidden inscription of the word "love," revealed only when light hits it at the right angle — an invitation to perceive love as an ever-present but often unseen force.</p>
+        <p>The mural's pattern is inspired by the ripple created by a single drop of water, symbolizing how every act of love creates waves that extend far beyond their origin. As the mural disperses into private collections around the world, each collector becomes an <em>Ambassador of LOVE</em> — carrying a fragment of the whole and anchoring the frequency of love wherever it lives.</p>
+        <p>Below, you can see every registered painting plotted on the globe. Each pink dot is a collector. Each line is a living connection. Together, we are forming a global constellation of love — proving that love, once set in motion, never stops expanding.</p>
+    </div>
+
+    <div class="stats">
+        <strong>5</strong>
+        COLLECTORS CONNECTED WORLDWIDE
+    </div>
+
+    <div id="globe-section">
+        <svg id="globe-svg"></svg>
+    </div>
+
+    <div class="hint">DRAG TO ROTATE &nbsp;·&nbsp; SCROLL TO ZOOM &nbsp;·&nbsp; CLICK PINK DOTS TO EXPLORE</div>
+
+    <div class="register">
+        <h2>BECOME AN AMBASSADOR OF LOVE</h2>
+        <p>Have you collected a LOVE Mural painting? Register it to add your dot to the global frequency network and become part of this living art installation.</p>
+        <a href="https://airtable.com/appsRQPAUkZcDZ5Sn/pagYNYTf2mkQSCLUa/form" target="_blank" class="btn" style="display: block; text-align: center; text-decoration: none; max-width: 400px; margin: 0 auto;">REGISTER YOUR PAINTING</a>
+    </div>
+
+</div>
+
+<footer>© 2025 CAMERON COHEN ART &nbsp;·&nbsp; THE GLOBAL FREQUENCY NETWORK PROJECT</footer>
+
+<div class="overlay" id="overlay">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div class="modal-city" id="modal-city"></div>
+        <div class="modal-text" id="modal-text"></div>
+    </div>
+</div>
+
+<!-- D3 v7 from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<!-- TopoJSON to draw country shapes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
+<script>
+// ── Collector data (real approved registrations from Airtable) ──────────────
+const collectors = [
+    { lat: 34.0195, lon: -118.4912, city: "Santa Monica, CA, USA", edition: 3, intention: "LOVE", displayName: "Susan Cohen", imageUrl: "https://static.wixstatic.com/media/6b9b88_f08c3c49239645b88004250830152274~mv2.jpg" },
+    { lat: 34.0195, lon: -118.4912, city: "Santa Monica, CA, USA", edition: 4, intention: "MORE LOVE", displayName: "Susan Cohen", imageUrl: "https://static.wixstatic.com/media/6b9b88_9d1a8e0a25ca4f39b59788d0eb6f34a0~mv2.jpg" },
+    { lat: 34.0195, lon: -118.4912, city: "Santa Monica, CA, USA", edition: 5, intention: "EVEN MORE LOVE", displayName: "Susan Cohen", imageUrl: "https://static.wixstatic.com/media/6b9b88_16d33e9562124250806bb8f171747e73~mv2.jpg" },
+    { lat: 34.4480, lon: -119.2429, city: "Ojai, CA, USA", edition: 1, intention: "LOVE", displayName: "Stacy S.", imageUrl: "https://static.wixstatic.com/media/6b9b88_815b4bcbdf274515a3d3ae80d53eea44~mv2.jpg" },
+    { lat: 32.7651, lon: -79.8440, city: "Sullivan's Island, SC, USA", edition: 21, intention: "SPREAD THE LOVE", displayName: "Anonymous Collector", imageUrl: "https://static.wixstatic.com/media/6b9b88_92e78bc700f64773a92fa6d276e57ca3~mv2.jpg" },
+];
+
+// Group collectors by location
+const locationGroups = {};
+collectors.forEach(c => {
+    const key = `${c.lat},${c.lon}`;
+    if (!locationGroups[key]) {
+        locationGroups[key] = {
+            lat: c.lat,
+            lon: c.lon,
+            city: c.city,
+            collectors: []
+        };
+    }
+    locationGroups[key].collectors.push(c);
+});
+
+const locations = Object.values(locationGroups);
+
+// ── Globe setup ─────────────────────────────────────────────────────────────
+const size   = Math.min(window.innerWidth - 80, 550);
+const radius = size / 2 - 10;
+let   rotate = [0, -20];   // [lambda, phi] — start centered on Atlantic
+let   dragging = false, lastPos;
+let   velX = 0.15, velY = 0;   // auto-spin velocity
+
+const projection = d3.geoOrthographic()
+    .scale(radius)
+    .translate([size / 2, size / 2])
+    .clipAngle(90)
+    .rotate(rotate);
+
+const path = d3.geoPath().projection(projection);
+
+const svg = d3.select('#globe-svg')
+    .attr('width',  size)
+    .attr('height', size);
+
+// ── Gradient defs for 3-D sphere look ───────────────────────────────────────
+const defs = svg.append('defs');
+
+const radGrad = defs.append('radialGradient')
+    .attr('id', 'sphereGrad')
+    .attr('cx', '40%').attr('cy', '35%')
+    .attr('r',  '65%');
+radGrad.append('stop').attr('offset', '0%').attr('stop-color', '#4fa8d5');
+radGrad.append('stop').attr('offset', '60%').attr('stop-color', '#1a6fa8');
+radGrad.append('stop').attr('offset', '100%').attr('stop-color', '#0d3d6b');
+
+const glowGrad = defs.append('radialGradient')
+    .attr('id', 'glowGrad')
+    .attr('cx', '40%').attr('cy', '35%')
+    .attr('r',  '65%');
+glowGrad.append('stop').attr('offset', '0%').attr('stop-color', 'white').attr('stop-opacity', 0.25);
+glowGrad.append('stop').attr('offset', '100%').attr('stop-color', 'white').attr('stop-opacity', 0);
+
+// Drop shadow filter
+const filter = defs.append('filter').attr('id', 'shadow');
+filter.append('feDropShadow')
+    .attr('dx', 4).attr('dy', 6)
+    .attr('stdDeviation', 10)
+    .attr('flood-color', '#000')
+    .attr('flood-opacity', 0.25);
+
+// ── Base sphere ─────────────────────────────────────────────────────────────
+const baseSphere = svg.append('circle')
+    .attr('cx', size/2).attr('cy', size/2).attr('r', radius)
+    .attr('fill', 'url(#sphereGrad)')
+    .attr('filter', 'url(#shadow)');
+
+// ── Layers we will redraw on rotate ─────────────────────────────────────────
+const landLayer  = svg.append('g').attr('class','land');
+const linesLayer = svg.append('g').attr('class','lines');
+const dotsLayer  = svg.append('g').attr('class','dots');
+
+// Gloss overlay — always on top
+const glossLayer = svg.append('circle')
+    .attr('cx', size/2).attr('cy', size/2).attr('r', radius)
+    .attr('fill', 'url(#glowGrad)')
+    .attr('pointer-events', 'none');
+
+// ── Load world TopoJSON (Natural Earth) ─────────────────────────────────────
+const TOPO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+
+d3.json(TOPO_URL).then(world => {
+    const land = topojson.feature(world, world.objects.land);
+
+    function render() {
+        projection.rotate(rotate);
+        
+        // Update sphere sizes based on current scale
+        const scaledRadius = radius * currentScale;
+        baseSphere.attr('r', scaledRadius);
+        glossLayer.attr('r', scaledRadius);
+
+        // Land
+        landLayer.selectAll('path').data([land])
+            .join('path')
+            .attr('d', path)
+            .attr('fill', '#3a7d52')
+            .attr('stroke', '#2a5c3c')
+            .attr('stroke-width', 0.5);
+
+        // Connection lines
+        const visibleCollectors = collectors.filter(c =>
+            isVisible(c.lon, c.lat)
+        );
+
+        const lineData = [];
+        for (let i = 0; i < collectors.length; i++) {
+            for (let j = i + 1; j < collectors.length; j++) {
+                lineData.push([collectors[i], collectors[j]]);
+            }
+        }
+
+        linesLayer.selectAll('line.arc').data(lineData)
+            .join('line')
+            .attr('class', 'arc')
+            .each(function(d) {
+                const p1 = projection([d[0].lon, d[0].lat]);
+                const p2 = projection([d[1].lon, d[1].lat]);
+                const v1 = isVisible(d[0].lon, d[0].lat);
+                const v2 = isVisible(d[1].lon, d[1].lat);
+                d3.select(this)
+                    .attr('x1', p1 ? p1[0] : null)
+                    .attr('y1', p1 ? p1[1] : null)
+                    .attr('x2', p2 ? p2[0] : null)
+                    .attr('y2', p2 ? p2[1] : null)
+                    .attr('stroke', '#FF69B4')
+                    .attr('stroke-width', 1.2)
+                    .attr('stroke-opacity', (v1 && v2) ? 0.55 : 0);
+            });
+
+        // Dots - now using location groups
+        const dotGroups = dotsLayer.selectAll('g.dot-group').data(locations)
+            .join('g')
+            .attr('class', 'dot-group')
+            .attr('cursor', 'pointer')
+            .style('display', d => isVisible(d.lon, d.lat) ? 'block' : 'none')
+            .each(function(d) {
+                const p = projection([d.lon, d.lat]);
+                d3.select(this).attr('transform', p ? `translate(${p[0]},${p[1]})` : 'translate(-999,-999)');
+            })
+            .on('click', (event, d) => {
+                event.stopPropagation();
+                showLocationModal(d);
+            });
+
+        // Circle for each dot group
+        dotGroups.selectAll('circle').data(d => [d])
+            .join('circle')
+            .attr('r', 7)
+            .attr('fill', '#FF1493')
+            .attr('stroke', 'white')
+            .attr('stroke-width', 1.8);
+
+        // Count badge for groups with multiple collectors
+        dotGroups.selectAll('text.count').data(d => d.collectors.length > 1 ? [d] : [])
+            .join('text')
+            .attr('class', 'count')
+            .attr('x', 10)
+            .attr('y', -5)
+            .attr('font-size', '11px')
+            .attr('font-weight', 'bold')
+            .attr('fill', 'white')
+            .attr('stroke', '#FF1493')
+            .attr('stroke-width', 3)
+            .attr('paint-order', 'stroke')
+            .text(d => d.collectors.length);
+    }
+
+    function isVisible(lon, lat) {
+        const r = rotate;
+        const lambda = lon + r[0];
+        const phi    = lat  + r[1];
+        const cosPhi = Math.cos(phi * Math.PI / 180);
+        const x = cosPhi * Math.cos(lambda * Math.PI / 180);
+        return x > 0;
+    }
+
+    // ── Drag interaction ────────────────────────────────────────────────────
+    const globeEl = document.getElementById('globe-section');
+    let currentScale = 1;
+    const minScale = 0.8;
+    const maxScale = 8;  // Increased from 3 to 8 for closer zoom
+
+    function startDrag(x, y) {
+        dragging = true;
+        lastPos  = [x, y];
+        velX = 0; velY = 0;
+    }
+
+    function moveDrag(x, y) {
+        if (!dragging) return;
+        const dx = x - lastPos[0];
+        const dy = y - lastPos[1];
+        // Scale sensitivity inversely with zoom - slower when zoomed in
+        const sensitivity = 0.4 / currentScale;
+        rotate[0] += dx * sensitivity;
+        rotate[1] -= dy * sensitivity;
+        rotate[1]  = Math.max(-85, Math.min(85, rotate[1]));
+        velX = dx * sensitivity;
+        velY = -dy * sensitivity;
+        lastPos = [x, y];
+        render();
+    }
+
+    function endDrag() { dragging = false; }
+
+    // Mouse zoom
+    globeEl.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        currentScale = Math.max(minScale, Math.min(maxScale, currentScale * delta));
+        projection.scale(radius * currentScale);
+        render();
+    }, { passive: false });
+
+    globeEl.addEventListener('mousedown',  e => startDrag(e.clientX, e.clientY));
+    globeEl.addEventListener('mousemove',  e => moveDrag(e.clientX, e.clientY));
+    globeEl.addEventListener('mouseup',    endDrag);
+    globeEl.addEventListener('mouseleave', endDrag);
+
+    // Touch zoom (pinch)
+    let touchDistance = 0;
+    
+    globeEl.addEventListener('touchstart', e => {
+        if (e.touches.length === 2) {
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            touchDistance = Math.sqrt(dx * dx + dy * dy);
+        } else if (e.touches.length === 1) {
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, {passive: true});
+    
+    globeEl.addEventListener('touchmove',  e => {
+        if (e.touches.length === 2) {
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            const newDistance = Math.sqrt(dx * dx + dy * dy);
+            const delta = newDistance / touchDistance;
+            currentScale = Math.max(minScale, Math.min(maxScale, currentScale * delta));
+            projection.scale(radius * currentScale);
+            touchDistance = newDistance;
+            render();
+            e.preventDefault();
+        } else if (e.touches.length === 1) {
+            moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+            e.preventDefault();
+        }
+    }, {passive: false});
+    
+    globeEl.addEventListener('touchend',   endDrag);
+
+    // ── Auto-rotation with inertia ──────────────────────────────────────────
+    function loop() {
+        if (!dragging && currentScale < 2) {  // Only auto-rotate when zoomed out
+            velX *= 0.96;
+            velY *= 0.96;
+            if (Math.abs(velX) < 0.05) velX = 0.15; // keep gentle spin
+            rotate[0] += velX;
+            rotate[1] += velY;
+            rotate[1]  = Math.max(-85, Math.min(85, rotate[1]));
+            render();
+        }
+        requestAnimationFrame(loop);
+    }
+
+    render();
+    loop();
+
+}).catch(err => {
+    console.error('TopoJSON load failed:', err);
+    document.getElementById('globe-section').innerHTML =
+        '<p style="color:red;text-align:center">Globe failed to load. Please check your internet connection.</p>';
+});
+
+// ── Modal ───────────────────────────────────────────────────────────────────
+function showLocationModal(location) {
+    if (location.collectors.length === 1) {
+        // Single collector - show details directly
+        showCollectorModal(location.collectors[0]);
+    } else {
+        // Multiple collectors - show list
+        document.getElementById('modal-city').innerHTML = `<div style="color:#FF1493;margin-bottom:8px;">${location.collectors.length} COLLECTORS</div>${location.city}`;
+        const listHtml = location.collectors
+            .sort((a, b) => a.edition - b.edition)
+            .map(c => `
+                <div style="padding:12px;border-bottom:1px solid #eee;cursor:pointer;transition:background 0.2s;" 
+                     onmouseover="this.style.background='#f9f9f9'" 
+                     onmouseout="this.style.background='white'"
+                     onclick='showCollectorDetails(${JSON.stringify(c).replace(/'/g, "&apos;")})'>
+                    <div style="font-weight:700;color:#FF1493;">EDITION #${c.edition}</div>
+                    <div style="font-size:14px;margin-top:4px;">"${c.intention}" — ${c.displayName}</div>
+                </div>
+            `).join('');
+        document.getElementById('modal-text').innerHTML = `
+            <div style="margin-top:10px;max-height:400px;overflow-y:auto;">
+                ${listHtml}
+            </div>
+            <div style="margin-top:15px;font-size:13px;color:#666;text-align:center;">Click any painting to view details</div>
+        `;
+        document.getElementById('overlay').style.display = 'flex';
+    }
+}
+
+function showCollectorDetails(collector) {
+    showCollectorModal(collector);
+}
+
+function showCollectorModal(d) {
+    const editionText = d.edition ? `<div style="font-size: 0.9em; color: #FF1493; margin-bottom: 8px;">EDITION #${d.edition}</div>` : '';
+    const imageHtml = d.imageUrl ? `<div style="text-align: center; margin: 15px 0;"><img src="${d.imageUrl}" crossorigin="anonymous" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; display: block; margin: 0 auto;" onerror="console.error('Image failed to load:', this.src); this.parentElement.style.display='none';"></div>` : '';
+    const intentionText = d.intention && d.displayName ? `<div style="font-style: italic; margin-top: 12px; color:#666;">"${d.intention}" — <strong>${d.displayName}</strong></div>` : d.intention ? `<div style="font-style: italic; margin-top: 12px; color: #666;">"${d.intention}"</div>` : '';
+    
+    document.getElementById('modal-city').innerHTML = editionText + d.city;
+    document.getElementById('modal-text').innerHTML = 
+        imageHtml + 
+        'This painting from The LOVE Mural collection is now part of the global frequency network, radiating intentional energy and connecting with collectors around the world.' + 
+        intentionText;
+    document.getElementById('overlay').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('overlay').style.display = 'none';
+}
+</script>
+</body>
+</html>
