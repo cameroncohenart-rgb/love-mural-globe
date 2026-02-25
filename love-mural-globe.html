@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,253 +8,258 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'DIN Neuzeit Grotesk', Arial, sans-serif;
-            background: white;
-            color: black;
-        }
+```
+    body {
+        font-family: 'DIN Neuzeit Grotesk', Arial, sans-serif;
+        background: white;
+        color: black;
+    }
 
-        .page {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 30px;
-        }
+    .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 30px;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+    header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
 
-        h1 {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 6px;
-            margin-bottom: 10px;
-        }
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 6px;
+        margin-bottom: 10px;
+    }
 
-        .pink-line {
-            width: 60px;
-            height: 3px;
-            background: #FF1493;
-            margin: 16px auto;
-        }
+    .pink-line {
+        width: 60px;
+        height: 3px;
+        background: #FF1493;
+        margin: 16px auto;
+    }
 
-        .subtitle {
-            font-size: 20px;
-            letter-spacing: 4px;
-            font-weight: 600;
-        }
+    .subtitle {
+        font-size: 20px;
+        letter-spacing: 4px;
+        font-weight: 600;
+    }
 
-        .intro {
-            max-width: 760px;
-            margin: 0 auto 40px;
-            font-size: 17px;
-            line-height: 1.9;
-            text-align: center;
-        }
+    .intro {
+        max-width: 760px;
+        margin: 0 auto 40px;
+        font-size: 17px;
+        line-height: 1.9;
+        text-align: center;
+    }
 
-        .intro p { margin-bottom: 16px; }
+    .intro p { margin-bottom: 16px; }
 
-        .stats {
-            text-align: center;
-            font-size: 16px;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
+    .stats {
+        text-align: center;
+        font-size: 16px;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+    }
 
-        .stats strong {
-            color: #FF1493;
-            font-size: 36px;
-            display: block;
-            margin-bottom: 4px;
-        }
+    .stats strong {
+        color: #FF1493;
+        font-size: 36px;
+        display: block;
+        margin-bottom: 4px;
+    }
 
-        #globe-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-            cursor: grab;
-            user-select: none;
-        }
+    #globe-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        cursor: grab;
+        user-select: none;
+    }
 
-        #globe-section:active { cursor: grabbing; }
+    #globe-section:active { cursor: grabbing; }
 
-        #globe-svg { 
-            display: block;
-            margin: 0 auto;
-        }
+    #globe-svg { 
+        display: block;
+        margin: 0 auto;
+    }
 
-        .hint {
-            text-align: center;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #aaa;
-            margin-bottom: 70px;
-        }
+    .hint {
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #aaa;
+        margin-bottom: 70px;
+    }
 
-        /* Registration */
-        .register {
-            background: #f9f9f9;
-            border-radius: 4px;
-            padding: 60px 40px;
-            margin-bottom: 60px;
-        }
+    /* Registration */
+    .register {
+        background: #f9f9f9;
+        border-radius: 4px;
+        padding: 60px 40px;
+        margin-bottom: 60px;
+    }
 
-        .register h2 {
-            text-align: center;
-            font-size: 28px;
-            letter-spacing: 5px;
-            margin-bottom: 12px;
-        }
+    .register h2 {
+        text-align: center;
+        font-size: 28px;
+        letter-spacing: 5px;
+        margin-bottom: 12px;
+    }
 
-        .register p {
-            text-align: center;
-            max-width: 520px;
-            margin: 0 auto 36px;
-            font-size: 16px;
-            line-height: 1.7;
-        }
+    .register p {
+        text-align: center;
+        max-width: 520px;
+        margin: 0 auto 36px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
 
-        form { max-width: 460px; margin: 0 auto; }
+    form { max-width: 460px; margin: 0 auto; }
 
-        .field { margin-bottom: 22px; }
+    .field { margin-bottom: 22px; }
 
-        label {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 7px;
-        }
+    label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
 
-        input[type=text], input[type=file] {
-            width: 100%;
-            padding: 13px;
-            border: 1.5px solid #ddd;
-            border-radius: 3px;
-            font-family: inherit;
-            font-size: 15px;
-        }
+    input[type=text], input[type=file] {
+        width: 100%;
+        padding: 13px;
+        border: 1.5px solid #ddd;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+    }
 
-        input[type=text]:focus { outline: none; border-color: #FF1493; }
+    input[type=text]:focus { outline: none; border-color: #FF1493; }
 
-        .note { font-size: 12px; color: #999; margin-top: 5px; }
+    .note { font-size: 12px; color: #999; margin-top: 5px; }
 
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: #FF1493;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background .25s;
-        }
+    .btn {
+        width: 100%;
+        padding: 15px;
+        background: #FF1493;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background .25s;
+    }
 
-        .btn:hover { background: #cc0070; }
+    .btn:hover { background: #cc0070; }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid #eee;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #aaa;
-        }
+    footer {
+        text-align: center;
+        padding: 30px;
+        border-top: 1px solid #eee;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #aaa;
+    }
 
-        /* Popup */
-        .overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.7);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-        }
+    /* Popup */
+    .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.7);
+        z-index: 999;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .modal {
-            background: white;
-            padding: 40px;
-            border-radius: 6px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-        }
+    .modal {
+        background: white;
+        padding: 40px;
+        border-radius: 6px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+    }
 
-        .close-btn {
-            position: absolute;
-            top: 12px; right: 16px;
-            font-size: 24px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            color: #bbb;
-            width: auto;
-            padding: 0;
-        }
+    .close-btn {
+        position: absolute;
+        top: 12px; right: 16px;
+        font-size: 24px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: #bbb;
+        width: auto;
+        padding: 0;
+    }
 
-        .close-btn:hover { color: black; background: none; }
+    .close-btn:hover { color: black; background: none; }
 
-        .modal-city {
-            font-size: 20px;
-            font-weight: 700;
-            color: #FF1493;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
+    .modal-city {
+        font-size: 20px;
+        font-weight: 700;
+        color: #FF1493;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
 
-        .modal-text { font-size: 15px; line-height: 1.7; color: #444; }
+    .modal-text { font-size: 15px; line-height: 1.7; color: #444; }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 30px; }
-            .register { padding: 40px 20px; }
-        }
-    </style>
+    @media (max-width: 600px) {
+        h1 { font-size: 30px; }
+        .register { padding: 40px 20px; }
+    }
+</style>
+```
+
 </head>
 <body>
 
 <div class="page">
 
-    <header>
-        <h1>GLOBAL FREQUENCY NETWORK MAP</h1>
-        <div class="pink-line"></div>
-        <div class="subtitle">THE LOVE MURAL</div>
-    </header>
+```
+<header>
+    <h1>GLOBAL FREQUENCY FIELD</h1>
+    <div class="pink-line"></div>
+    <div class="subtitle">THE LOVE MURAL</div>
+</header>
 
-    <div class="intro">
-        <p>The LOVE Mural is a large-scale, participatory installation composed of 222 individual circular paintings. Each panel carries a hidden inscription of the word "love," revealed only when light hits it at the right angle — an invitation to perceive love as an ever-present but often unseen force.</p>
-        <p>The mural's pattern is inspired by the ripple created by a single drop of water, symbolizing how every act of love creates waves that extend far beyond their origin. As the mural disperses into private collections around the world, each collector becomes an <em>Ambassador of LOVE</em> — carrying a fragment of the whole and anchoring the frequency of love wherever it lives.</p>
-        <p>Below, you can see every registered painting plotted on the globe. Each pink dot is a collector. Each line is a living connection. Together, we are forming a global constellation of love — proving that love, once set in motion, never stops expanding.</p>
-    </div>
+<div class="intro">
+    <p>The LOVE Mural is a large-scale, participatory installation composed of 222 individual circular paintings. Each panel carries a hidden inscription of the word "love," revealed only when light hits it at the right angle — an invitation to perceive love as an ever-present but often unseen force.</p>
+    <p>The mural's pattern is inspired by the ripple created by a single drop of water, symbolizing how every act of love creates waves that extend far beyond their origin. As the mural disperses into private collections around the world, each collector becomes an <em>Ambassador of LOVE</em> — carrying a fragment of the whole and anchoring the frequency of love wherever it lives.</p>
+    <p>Below, you can see every registered painting plotted on the globe. Each pink dot is a collector. Each line is a living connection. Together, we are forming a global constellation of love — proving that love, once set in motion, never stops expanding.</p>
+</div>
 
-    <div class="stats">
-        <strong>5</strong>
-        COLLECTORS CONNECTED WORLDWIDE
-    </div>
+<div class="stats">
+    <strong>5</strong>
+    COLLECTORS CONNECTED WORLDWIDE
+</div>
 
-    <div id="globe-section">
-        <svg id="globe-svg"></svg>
-    </div>
+<div id="globe-section">
+    <svg id="globe-svg"></svg>
+</div>
 
-    <div class="hint">DRAG TO ROTATE &nbsp;·&nbsp; SCROLL TO ZOOM &nbsp;·&nbsp; CLICK PINK DOTS TO EXPLORE</div>
+<div class="hint">DRAG TO ROTATE &nbsp;·&nbsp; SCROLL TO ZOOM &nbsp;·&nbsp; CLICK PINK DOTS TO EXPLORE</div>
 
-    <div class="register">
-        <h2>BECOME AN AMBASSADOR OF LOVE</h2>
-        <p>Have you collected a LOVE Mural painting? Register it to add your dot to the global frequency network and become part of this living art installation.</p>
-        <a href="https://airtable.com/appsRQPAUkZcDZ5Sn/pagYNYTf2mkQSCLUa/form" target="_blank" class="btn" style="display: block; text-align: center; text-decoration: none; max-width: 400px; margin: 0 auto;">REGISTER YOUR PAINTING</a>
-    </div>
+<div class="register">
+    <h2>BECOME AN AMBASSADOR OF LOVE</h2>
+    <p>Have you collected a LOVE Mural painting? Register it to add your dot to the global frequency field and become part of this living art installation.</p>
+    <a href="https://airtable.com/appsRQPAUkZcDZ5Sn/pagYNYTf2mkQSCLUa/form" target="_blank" class="btn" style="display: block; text-align: center; text-decoration: none; max-width: 400px; margin: 0 auto;">REGISTER YOUR PAINTING</a>
+</div>
+```
 
 </div>
 
-<footer>© 2025 CAMERON COHEN ART &nbsp;·&nbsp; THE GLOBAL FREQUENCY NETWORK PROJECT</footer>
+<footer>© 2025 CAMERON COHEN ART &nbsp;·&nbsp; THE GLOBAL FREQUENCY FIELD PROJECT</footer>
 
 <div class="overlay" id="overlay">
     <div class="modal">
@@ -264,8 +270,11 @@
 </div>
 
 <!-- D3 v7 from CDN -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
 <!-- TopoJSON to draw country shapes -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 
 <script>
@@ -595,7 +604,7 @@ function showCollectorModal(d) {
     document.getElementById('modal-city').innerHTML = editionText + d.city;
     document.getElementById('modal-text').innerHTML = 
         imageHtml + 
-        'This painting from The LOVE Mural collection is now part of the global frequency network, radiating intentional energy and connecting with collectors around the world.' + 
+        'This painting from The LOVE Mural collection is now part of the global frequency field, radiating intentional energy and connecting with collectors around the world.' + 
         intentionText;
     document.getElementById('overlay').style.display = 'flex';
 }
@@ -604,5 +613,6 @@ function closeModal() {
     document.getElementById('overlay').style.display = 'none';
 }
 </script>
+
 </body>
 </html>
