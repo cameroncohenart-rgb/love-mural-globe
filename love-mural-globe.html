@@ -228,7 +228,7 @@
     </header>
 
     <div class="stats">
-        <strong>11</strong>
+        <strong id="collector-count">0</strong>
         COLLECTORS CONNECTED WORLDWIDE
     </div>
 
@@ -278,7 +278,7 @@ const collectors = [
     { lat: 34.0689, lon: -118.2070, city: "Los Angeles, CA, USA", edition: 11, intention: "Continue to spread love.", displayName: "Anonymous Collector", imageUrl: "" },
 ];
 
-// Group collectors by location
+document.getElementById('collector-count').textContent = collectors.length; document.getElementById('collector-count').textContent = collectors.length; // Group collectors by location
 const locationGroups = {};
 collectors.forEach(c => {
     const key = `${c.lat},${c.lon}`;
