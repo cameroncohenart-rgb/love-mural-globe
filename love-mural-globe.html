@@ -176,7 +176,7 @@
             background: rgba(0,0,0,.7);
             z-index: 999;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; padding-top: 180px;
         }
 
         .modal {
@@ -445,23 +445,14 @@ d3.json(TOPO_URL).then(world => {
             }
         }
 
-        linesLayer.selectAll('line.arc').data(lineData)
-            .join('line')
-            .attr('class', 'arc')
-            .each(function(d) {
-                const p1 = projection([d[0].lon, d[0].lat]);
-                const p2 = projection([d[1].lon, d[1].lat]);
-                const v1 = isVisible(d[0].lon, d[0].lat);
-                const v2 = isVisible(d[1].lon, d[1].lat);
-                d3.select(this)
-                    .attr('x1', p1 ? p1[0] : null)
-                    .attr('y1', p1 ? p1[1] : null)
-                    .attr('x2', p2 ? p2[0] : null)
-                    .attr('y2', p2 ? p2[1] : null)
-                    .attr('stroke', '#FF69B4')
-                    .attr('stroke-width', 1.2)
-                    .attr('stroke-opacity', (v1 && v2) ? 0.55 : 0);
-            });
+        linesLayer.selectAll('path.arc').data(lineData)
+    .join('path')
+    .attr('class', 'arc')
+    .attr('d', d => path({type: 'LineString', coordinates: [[d[0].lon, d[0].lat], [d[1].lon, d[1].lat]]}))
+    .attr('fill', 'none')
+    .attr('stroke', '#FF69B4')
+    .attr('stroke-width', 1.2)
+    .attr('stroke-opacity', 0.45);
 
         // Dots - now using location groups
         const dotGroups = dotsLayer.selectAll('g.dot-group').data(locations)
@@ -644,7 +635,7 @@ function showCollectorDetails(collector) {
 function showCollectorModal(d) {
     const editionText = d.edition ? `<div style="font-size: 0.9em; color: #FF1493; margin-bottom: 8px;">EDITION #${d.edition}</div>` : '';
     const imageHtml = d.imageUrl ? `<div style="text-align: center; margin: 15px 0;"><img src="${d.imageUrl}" crossorigin="anonymous" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; display: block; margin: 0 auto;" onerror="console.error('Image failed to load:', this.src); this.parentElement.style.display='none';"></div>` : '';
-    const intentionText = d.intention && d.displayName ? `<div style="font-style: italic; margin-top: 12px; color:#666;">"${d.intention}" — <strong>${d.displayName}</strong></div>` : d.intention ? `<div style="font-style: italic; margin-top: 12px; color: #666;">"${d.intention}"</div>` : '';
+    const intentionText = d.intention && d.displayName ? `<div style="font-style: italic; margin-top: 12px; color:#666;">"${d.intention}" — <strong>${d.displayName}</strong></div>` : d.intention ? `<div style="font-style: italic; margin-top: 12px; color: #666;">"${d.intention}"</div>` : `<div style="margin-top: 12px; color: #666;"><strong>${d.displayName || 'Anonymous Collector'}</strong></div>`;
     
     document.getElementById('modal-city').innerHTML = editionText + d.city;
     document.getElementById('modal-text').innerHTML = 
