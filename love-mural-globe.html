@@ -514,7 +514,7 @@ d3.json(TOPO_URL).then(world => {
     const globeEl = document.getElementById('globe-section');
     let currentScale = 1;
     const minScale = 0.8;
-    const maxScale = 40;  // Increased from 3 to 8 for closer zoom
+    const maxScale = 120;  // Increased from 3 to 8 for closer zoom
 
     function startDrag(x, y) {
         dragging = true;
@@ -624,7 +624,7 @@ function showLocationModal(location) {
                      onmouseout="this.style.background='white'"
                      onclick='showCollectorDetails(${JSON.stringify(c).replace(/'/g, "&apos;")})'>
                     <div style="font-weight:700;color:#FF1493;">EDITION #${c.edition}</div>
-                    <div style="font-size:14px;margin-top:4px;">"${c.intention}" — ${c.displayName}</div>
+                    <div style="font-size:14px;margin-top:4px;">${c.intention ? '"' + c.intention + '" — ' : ''}${c.displayName}</div>
                 </div>
             `).join('');
         document.getElementById('modal-text').innerHTML = `
