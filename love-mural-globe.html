@@ -188,7 +188,7 @@
             position: relative;
         }
 
-        .close-btn {
+        .list-scroll::-webkit-scrollbar { width: 12px; } .list-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 6px; } .list-scroll::-webkit-scrollbar-thumb { background: #FF69B4; border-radius: 6px; } .close-btn {
             position: absolute;
             top: 12px; right: 16px;
             font-size: 24px;
@@ -445,14 +445,23 @@ d3.json(TOPO_URL).then(world => {
             }
         }
 
-        linesLayer.selectAll('path.arc').data(lineData)
-    .join('path')
+       linesLayer.selectAll('line.arc').data(lineData)
+    .join('line')
     .attr('class', 'arc')
-    .attr('d', d => path({type: 'LineString', coordinates: [[d[0].lon, d[0].lat], [d[1].lon, d[1].lat]]}))
-    .attr('fill', 'none')
-    .attr('stroke', '#FF69B4')
-    .attr('stroke-width', 1.2)
-    .attr('stroke-opacity', 0.45);
+    .each(function(d) {
+        const p1 = projection([d[0].lon, d[0].lat]);
+        const p2 = projection([d[1].lon, d[1].lat]);
+        const v1 = isVisible(d[0].lon, d[0].lat);
+        const v2 = isVisible(d[1].lon, d[1].lat);
+        d3.select(this)
+            .attr('x1', p1 ? p1[0] : null)
+            .attr('y1', p1 ? p1[1] : null)
+            .attr('x2', p2 ? p2[0] : null)
+            .attr('y2', p2 ? p2[1] : null)
+            .attr('stroke', '#FF69B4')
+            .attr('stroke-width', 1.2)
+            .attr('stroke-opacity', (v1 && v2) ? 0.55 : 0);
+    });
 
         // Dots - now using location groups
         const dotGroups = dotsLayer.selectAll('g.dot-group').data(locations)
@@ -619,7 +628,7 @@ function showLocationModal(location) {
                 </div>
             `).join('');
         document.getElementById('modal-text').innerHTML = `
-            <div style="margin-top:10px;max-height:400px;overflow-y:auto;">
+            <div class="list-scroll" style="margin-top:10px;max-height:400px;overflow-y:scroll;">
                 ${listHtml}
             </div>
             <div style="margin-top:15px;font-size:13px;color:#666;text-align:center;">Click any painting to view details</div>
