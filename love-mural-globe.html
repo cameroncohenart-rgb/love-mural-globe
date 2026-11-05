@@ -514,7 +514,7 @@ d3.json(TOPO_URL).then(world => {
     const globeEl = document.getElementById('globe-section');
     let currentScale = 1;
     const minScale = 0.8;
-    const maxScale = 8;  // Increased from 3 to 8 for closer zoom
+    const maxScale = 40;  // Increased from 3 to 8 for closer zoom
 
     function startDrag(x, y) {
         dragging = true;
